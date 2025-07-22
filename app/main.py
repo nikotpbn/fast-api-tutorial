@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from .models import Item
+
 app = FastAPI()
 
 fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
@@ -40,4 +42,8 @@ async def read_user_item(
 @app.get("/items/{item_id}")
 async def read_user_item(item_id: str, needy: str):
     item = {"item_id": item_id, "needy": needy}
+    return item
+
+@app.post("/items/")
+async def create_item(item: Item):
     return item
